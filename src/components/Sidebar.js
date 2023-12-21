@@ -42,7 +42,7 @@ const Sidebar = () => {
       </div>
 
 
-      <div class=" border"></div>
+      <div className=" border"></div>
 
           <div>
             <ul className="">
@@ -129,7 +129,7 @@ const Sidebar = () => {
                 </li>
               </ul>
 
-      <div class=" border"></div>
+      <div className=" border"></div>
 
           <div>
               <ul className="">
