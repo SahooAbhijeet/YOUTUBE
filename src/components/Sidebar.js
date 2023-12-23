@@ -1,222 +1,153 @@
 import React from 'react'
+import { MdHome, MdSubscriptions, MdDynamicFeed, MdHistory, MdOutlineWatchLater, MdOutlineLibraryAdd, MdMusicNote, MdPodcasts, MdEmojiFlags } from "react-icons/md";
+import { AiOutlineLike } from "react-icons/ai";
+import { SiYoutubeshorts, SiYoutubegaming } from "react-icons/si";
+import { ImNewspaper } from "react-icons/im";
+import { GiTrophyCup } from "react-icons/gi";
+import { IoMdSettings, IoIosHelpCircleOutline } from "react-icons/io";
+import { PiFilmSlateBold } from "react-icons/pi";
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
+const mainLinks = [
+  {
+    icon: <MdHome className='text-3xl'/>,
+    name: 'Home'
+  },
+  {
+    icon: <SiYoutubeshorts className='text-3xl'/>,
+    name: 'Shorts'
+  },
+  {
+    icon: <MdSubscriptions className='text-3xl'/>,
+    name: 'Subscriptions'
+  },
+]
+
+const secondaryLinks = [
+  {
+    icon: <MdHistory className='text-3xl'/>,
+    name: 'History'
+  },
+  {
+    icon: <MdDynamicFeed className='text-3xl'/>,
+    name: 'Your videos'
+  },
+  {
+    icon: <MdOutlineWatchLater className='text-3xl'/>,
+    name: 'Watch Later'
+  },
+  {
+    icon: <AiOutlineLike className='text-3xl'/>,
+    name: 'Liked videos'
+  }
+]
+
+const exploreLinks = [
+  {
+    icon: <MdMusicNote className='text-3xl'/>,
+    name: 'Music'
+  },
+  {
+    icon: <PiFilmSlateBold className='text-3xl'/>,
+    name: 'Films'
+  },
+  {
+    icon: <ImNewspaper className='text-3xl'/>,
+    name: 'Gaming'
+  },
+  {
+    icon: <GiTrophyCup className='text-3xl'/>,
+    name: 'Sport'
+  },
+  {
+    icon: <MdPodcasts className='text-3xl'/>,
+    name: 'Podcasts'
+  },
+  {
+    icon: <MdOutlineLibraryAdd className='text-3xl'/>,
+    name: 'Library'
+  }
+]
+
+const primaryLinks = [
+  {
+    icon: <IoMdSettings className='text-3xl'/>,
+    name: 'Settings' 
+  },
+  {
+    icon: <MdEmojiFlags className='text-3xl'/>,
+    name: 'Report settings'
+  },
+  {
+    icon: <IoIosHelpCircleOutline className='text-3xl'/>,
+    name: 'Help' 
+  }, 
+]
 
 
 const Sidebar = () => {
-
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
-  if(!isMenuOpen)
-  return null;
- 
+if(!isMenuOpen)
+return null;
+
   return (
-    <div className="w-80 bg-gray-100 max-h-fit">
-      <div>
-        <ul className="px-16">
-          <li className="flex items-center mb-3">
-            <span className="mr-4"></span>
-            <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-              Home
-            </a>
-          </li>
-        </ul>
+  
+<div className="pr-5 p-2 pb-8 bg-gray-300 w-2/12 h-screen fixed overflow-y-auto">      
+        <ul className='flex flex-col border-b-2 border-gray-600'>
+        {mainLinks.map(({icon, name}) => {
+          return (
+            <li key={name} className={`pl-6 py-3 hover:bg-zinc-100 ${name==='Home' ? "bg-slate-200" : " "} rounded-xl`}>
+              <Link to="#" className='flex gap-5 items-center'>{icon}
+              <span className='text-sm tracking-wider font-semibold'>{name}</span>
+              </Link>
+            </li>
+          )
+        })}
 
+      </ul>
 
-            <ul className="px-16">
-              <li className="flex items-center mb-3">
-                <span className="mr-4"></span>
-                  <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                    Shorts 
-                  </a>
-                </li>
-              </ul>
+      <ul className='flex flex-col border-b-2 border-gray-600'>
+        {secondaryLinks.map(({icon, name}) => {
+          return (
+            <li key={name} className={`pl-6 py-3 hover:bg-zinc-100 ${name==='Home' ? "bg-slate-200" : " "} rounded-xl`}>
+              <Link to="#" className='flex gap-5 items-center'>{icon}
+              <span className='text-sm tracking-wider font-semibold'>{name}</span>
+              </Link>
+            </li>
+          )
+        })}
 
+      </ul>
 
-            <ul className="px-16">
-              <li className="flex items-center mb-3">
-                <span className="mr-4"></span>
-                  <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                    Subscriptions 
-                  </a>
-              </li>
-            </ul>
-      </div>
+      <ul className='flex flex-col border-b-2 border-gray-800'>
+        {exploreLinks.map(({icon, name}) => {
+          return (
+            <li key={name} className={`pl-6 py-3 hover:bg-zinc-100 ${name==='Home' ? "bg-slate-200" : " "} rounded-xl`}>
+              <Link to="#" className='flex gap-5 items-center'>{icon}
+              <span className='text-sm tracking-wider font-semibold'>{name}</span>
+              </Link>
+            </li>
+          )
+        })}
 
+      </ul>
 
-      <div className=" border"></div>
+      <ul className='flex flex-col border-b-2 border-gray-800'>
+        {primaryLinks.map(({icon, name}) => {
+          return (
+            <li key={name} className={`pl-6 py-3 hover:bg-zinc-100 ${name==='Home' ? "bg-slate-200" : " "} rounded-xl`}>
+              <Link to="#" className='flex gap-5 items-center'>{icon}
+              <span className='text-sm tracking-wider font-semibold'>{name}</span>
+              </Link>
+            </li>
+          )
+        })}
 
-          <div>
-            <ul className="">
-              <li className="flex items-center mb-3">
-                <span className="mr-6"></span>
-                  <a href="#" className="block text-gray-800 hover:text-black text-center text-xl font-semibold">
-                    Explore
-                  </a>
-              </li>
-            </ul>
-          </div>
+      </ul>
+    </div>
 
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Trending 
-                    </a>
-                </li>
-              </ul>        
-
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Shopping 
-                    </a>
-                </li>
-              </ul>
-        
-
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Musics 
-                    </a>
-                </li>
-              </ul>
-        
-
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Films 
-                    </a>
-                </li>
-              </ul>
-        
-
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Gamings 
-                    </a>
-                </li>
-              </ul>
-        
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Sport 
-                    </a>
-        
-                </li>
-              </ul>
-
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Learning 
-                    </a>
-                </li>
-              </ul>
-
-      <div className=" border"></div>
-
-          <div>
-              <ul className="">
-                <li className="flex items-center mb-3">
-                  <span className="mr-6"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl font-semibold">
-                      More from YouTube
-                    </a>
-                </li>
-              </ul>
-          </div>
-
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Your Channel 
-                    </a>
-                </li>
-              </ul>
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      History 
-                    </a>
-                </li>
-              </ul>
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Watch Later 
-                    </a>
-                </li>
-              </ul>
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Liked Videos 
-                    </a>
-                </li>
-              </ul>
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Settings 
-                    </a>
-                </li>
-              </ul>
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl">
-                      Help 
-                    </a>
-                </li>
-              </ul>
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl truncate">
-                      Send Feedback 
-                    </a>
-                </li>
-              </ul>
-
-              <ul className="px-16">
-                <li className="flex items-center mb-3">
-                  <span className="mr-4"></span>
-                    <a href="#" className="block text-gray-800 hover:text-black text-center text-xl truncate">
-                      Youtube Premium 
-                    </a>
-                </li>
-              </ul>
-      </div>      
   )
 }
-
 
 export default Sidebar

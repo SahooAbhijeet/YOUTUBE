@@ -3,7 +3,7 @@ import Button from './Button'
 
 const ButtonList = () => {
   return (
-    <div className='flex whitespace-nowrap '>
+    <div className='flex whitespace-nowrap  '>
       <Button name="All"/>
       <Button name="Music"/>
       <Button name="Gaming"/>
