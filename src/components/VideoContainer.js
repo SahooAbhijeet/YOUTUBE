@@ -19,7 +19,7 @@ const VideoContainer = () => {
       setVideos(json.items);
     } catch (error) {
       console.log(error);
-      throw error
+      throw error;
     }
   }
   

@@ -28,6 +28,7 @@ const App = () => {
     <div>
           <Header />
           <RouterProvider router={appRouter} />
+          
     </div>
     </Provider>
   )

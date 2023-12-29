@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { toggleMenu } from '../Redux/Slices/app-slice';
 import { useDispatch } from 'react-redux';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
-import { FaUser } from "react-icons/fa6";
-import { IoNotifications, IoMenu  } from "react-icons/io5";
+import { BsBell } from 'react-icons/bs'
+import {  IoMenu  } from "react-icons/io5";
 import { IoMdMic } from "react-icons/io";
 import { BiSolidVideoPlus } from "react-icons/bi";
+import { AiOutlineSearch } from 'react-icons/ai';
 
 const Header = () => {
 
@@ -64,46 +65,65 @@ const Header = () => {
 
 
   return (
-    <div className=' flex md:gap-10 shadow-lg  justify-between px-14 h-16 items-center w-full'>
-        <div className='flex gap-4 items-center flex-shrink-0 pr-4 '>
-          <a href='#'>
-            <IoMenu className='text-3xl' onClick={() => toggleMenuHandler()} />
-          </a>
-                <a href='/'>
-                <img 
-                className='w-32 h-10'
+    <div className='flex justify-between px-14 h-20 items-center bg-black opacity-95 sticky text-white pl-6 gap-'>
+        <div className='flex  items-center text-2xl '>
+          <div >
+          <IoMenu className='text-3xl ' onClick={() => toggleMenuHandler()} />
+          </div>
+
+          <div >
+          <img 
+                className='w-36 h-20 flex-shrink-0 '
                 alt='youtube'
-                src='https://www.logo.wine/a/logo/YouTube/YouTube-Logo.wine.svg'
+                src='https://cdn.gtricks.com/2021/04/how-to-enable-youtube-dark-mode-on-pc-and-android-ios.jpg'
                 />
-                </a>
+          </div>
+          </div>
+
+               <div className='flex items-center justify-center gap-5'>
+                <form>
+                  <div className='flex bg-zinc-900 items-center h-10 px-4 pr-0 rounded-3xl'>
+                    <div className='flex gap-5 items-center pr-5'>
+                      <input
+                      type='text' 
+                      placeholder='Search' 
+                      className='w-[500px] text-white bg-zinc-900 focus:outline-none border-none'
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onFocus={() => setShowSuggestions(true)}
+                      onBlur={() => setShowSuggestions(false)}/>
+                    </div>
+                    <button className='h-10 w-16 flex items-center justify-center bg-zinc-800 rounded-r-3xl'>
+                      <AiOutlineSearch  className='text-xl'/>
+                    </button>
+                    
+                  </div>
+                </form>
+                
+
+                <div className=' p-3 bg-zinc-900 rounded-full hover:bg-gray-800 '>
+                <IoMdMic className='text-3xl '/> 
+               </div>
+               </div>
+
+                <div className='flex gap-8 items-center text-xl'>
+                <BiSolidVideoPlus className='text-3xl '/>
+
+                <div className='relative'>
+                  <BsBell />
+                  <span className='absolute bottom-2 left-2 text-xs bg-red-600 rounded-full px-1'>9+</span>
+                </div>
+                
+
+                <img 
+                src='https://media.licdn.com/dms/image/D5603AQEhwA94RoaZtg/profile-displayphoto-shrink_800_800/0/1700829269428?e=1709164800&v=beta&t=uMmtuSq1CjDQtSF42qP6rInWLpFC5uBxlwBTV64hBRQ'
+                alt='profile'
+                className='w-9 h-9 rounded-full' />
+           
         </div>
 
-      
-        <div className=' px-2 flex items-center '>
-            <input 
-            className='w-[450px] justify-end rounded-l-full border border-gray-400 p-2 px-5'
-            type='text'
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
-            />
-            <button className='border border-gray-400 w-16 rounded-r-full  p-2 bg-gray-200'> 🔍 </button>
-              <IoMdMic className='text-4xl rounded-full bg-gray-200 m-2 hover:bg-gray-300'/>
-        </div>
-        
-        {showsuggestions && (
-        <div className='fixed bg-white p-2 w-[37rem] shadow-lg rounded-lg border border-gray-100 items-center'>
-          <ul>
-            {suggestions.map((s) => (
-              <li key={s} className='py-2 px-3 shadow-sm hover:bg-gray-100'>
-                🔍{s}
-              </li>
-            ))}
-          </ul>
         </div>
 
-        )}
 
 
        
@@ -112,12 +132,12 @@ const Header = () => {
  
       
 
-        <div className='flex items-center gap-6'>
-        <BiSolidVideoPlus className='text-3xl '/>
-        <IoNotifications className='text-3xl'/>
-        <FaUser className='text-2xl'/>
-        </div>
-    </div>
+    //     <div className='flex items-center gap-6'>
+        
+    //     <IoNotifications className='text-3xl'/>
+    //     <FaUser className='text-2xl'/>
+    //     </div>
+    // </div>
   )
 }
 
