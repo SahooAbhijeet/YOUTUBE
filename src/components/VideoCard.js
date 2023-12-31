@@ -3,12 +3,11 @@ import React from 'react'
 
 const VideoCard = ({info}) => {
     // console.log(info);
-    const { snippet, statistics, contentDetails
-    } = info;
-    const {channelTitle, thumbnails, localized,publishedAt} = snippet;
-    const {title, description}  = localized;
-    const {commentCount, favoriteCount, likeCount,viewCount} = statistics;
-      const convert = (viewCount/10000).toFixed(0) + "k";
+      const { snippet, statistics, contentDetails} = info;
+      const {channelTitle, thumbnails, localized} = snippet;
+      const {title}  = localized;
+      const {viewCount} = statistics;
+      
      
     
 
@@ -23,18 +22,61 @@ const VideoCard = ({info}) => {
         }
         return "00:00"; 
       };
-
       const timeCode = convertDurationToTimeCode(duration);
 
 
       
+      function formatViews(count) {
+        if (count >= 1e9) {
+          return (count / 1e9).toFixed(1) + 'B';
+        } else if (count >= 1e6) {
+          return (count / 1e6).toFixed(1) + 'M';
+        } else if (count >= 1e3) {
+          return (count / 1e3).toFixed(1) + 'K';
+        } else {
+          return count.toString();
+        }
+      }
+      const convert = formatViews(viewCount);
+     
 
-  const currentDate = new Date();
-  const givenDate = new Date(publishedAt);
-  const differenceInMilliseconds =  currentDate - givenDate;
 
-  const millisecondsInDay = 1000 * 60 * 60 * 24;
-  const differenceInDays = Math.abs(Math.floor(differenceInMilliseconds / millisecondsInDay));
+
+
+
+
+          const days = snippet.publishedAt
+          function getTimeAgo(timestamp) {
+            const current = new Date();
+            const previous = new Date(timestamp);
+          
+            const seconds = Math.floor((current - previous) / 1000);
+            let interval = Math.floor(seconds / 31536000);
+          
+            if (interval >= 1) {
+              return interval === 1 ? `${interval} year ago` : `${interval} years ago`;
+            }
+            interval = Math.floor(seconds / 2592000);
+            if (interval >= 1) {
+              return interval === 1 ? `${interval} month ago` : `${interval} months ago`;
+            }
+            interval = Math.floor(seconds / 86400);
+            if (interval >= 1) {
+              return interval === 1 ? `${interval} day ago` : `${interval} days ago`;
+            }
+            interval = Math.floor(seconds / 3600);
+            if (interval >= 1) {
+              return interval === 1 ? `${interval} hour ago` : `${interval} hours ago`;
+            }
+            interval = Math.floor(seconds / 60);
+            if (interval >= 1) {
+              return interval === 1 ? `${interval} minute ago` : `${interval} minutes ago`;
+            }
+            return `${Math.floor(seconds)} seconds ago`;
+          }
+            const time = getTimeAgo(days)
+
+  
 
   return (
 
@@ -73,7 +115,7 @@ const VideoCard = ({info}) => {
                 {convert} views
               </span>
               <span >
-                 {differenceInDays} days ago
+                 {time}  
                
               </span>
             </div>

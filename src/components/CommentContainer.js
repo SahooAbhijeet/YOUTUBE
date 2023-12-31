@@ -99,9 +99,9 @@ const commentsData = [
 const Comment = ({data}) => {
   const {name, text, replies } = data;
   return (
-    <div className='flex shadow-md bg-gray-100 p-2 rounded-lg my-2'>
+    <div className='flex shadow-md bg-gray-100 p-2 rounded-lg my-2 '>
       <img
-      className='w-12 h-12'
+      className='w-12 h-12 text-black'
       src='https://pixsector.com/cache/50fcb576/av0cc3f7b41cb8510e35c.png'
       alt='user'
       />
@@ -129,8 +129,8 @@ const CommentList = ({ comments }) => {
 
 const CommentContainer = () => {
   return (
-    <div className='m-5 p-2'>
-      <h1 className='text-2xl font-bold'>Comments: </h1>
+    <div className='m-5 p-2 text-black'>
+      <h1 className='text-2xl font-bold text-black'>Comments: </h1>
       <CommentList comments={commentsData} />
     </div>
   )

@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { toggleMenu } from '../Redux/Slices/app-slice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
 import { BsBell } from 'react-icons/bs'
 import {  IoMenu  } from "react-icons/io5";
 import { IoMdMic } from "react-icons/io";
 import { BiSolidVideoPlus } from "react-icons/bi";
 import { AiOutlineSearch } from 'react-icons/ai';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { MdHistory } from "react-icons/md";
 
 const Header = () => {
 
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  // const searchTerm = useSelector((state) => state.app.searchTerm);
   const [ searchQuery, setSearchQuery] = useState(" ");
   const [ suggestions, setSuggestion ] = useState([ ]);
   const [ showsuggestions, setShowSuggestions] = useState(false);
-  const dispatch = useDispatch(); 
+  
 
 
-  const toggleMenuHandler = () => {
-    dispatch(toggleMenu());
-  }
+
 
   useEffect(() => {
     //API CALL
@@ -63,6 +66,11 @@ const Header = () => {
       setSuggestion(json[1]);
   }
 
+  const dispatch = useDispatch(); 
+
+  const toggleMenuHandler = () => {
+    dispatch(toggleMenu());
+  }
 
   return (
     <div className='flex justify-between px-14 h-20 items-center bg-black opacity-95 sticky text-white pl-6 gap-'>
@@ -96,8 +104,27 @@ const Header = () => {
                     <button className='h-10 w-16 flex items-center justify-center bg-zinc-800 rounded-r-3xl'>
                       <AiOutlineSearch  className='text-xl'/>
                     </button>
-                    
-                  </div>
+                    </div>
+                    {showsuggestions && (
+        <div className='fixed bg-black text-white p-2 w-[37rem] h-[17rem] shadow-lg rounded-lg border border-gray-100'>
+          <ul className='flex flex-wrap'>
+            {suggestions.map((s) => (
+              <li key={s} className='py-2 px-3 shadow-sm hover:bg-gray-900 '>
+                
+                <MdHistory className='text-2xl flex'/>
+                
+                {s}
+                 
+               
+              </li>
+            ))}
+          </ul>
+
+        </div>
+        )}
+        
+                
+
                 </form>
                 
 

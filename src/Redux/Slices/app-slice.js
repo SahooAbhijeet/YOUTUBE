@@ -3,9 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
     name: "app",
     initialState: {
-        isMenuOpen: false,
+        isMenuOpen: true,
         videos: [],
         nextPageToken: null,
+        searchTerm: "",
+        currentPlaying: null,
+        searchResults: [],
+        recommendedVideo: []
     },
     reducers: {
         toggleMenu: (state) => {
