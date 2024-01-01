@@ -9,18 +9,58 @@ import { BiSolidVideoPlus } from "react-icons/bi";
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdHistory } from "react-icons/md";
+import {YOUTUBE_VIDEOS_API} from '../utils/constants'
+
 
 const Header = () => {
 
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const searchTerm = useSelector((state) => state.app.searchTerm);
   const [ searchQuery, setSearchQuery] = useState(" ");
   const [ suggestions, setSuggestion ] = useState([ ]);
   const [ showsuggestions, setShowSuggestions] = useState(false);
-  
+  const [ videos, setVideos] = useState(searchQuery)
 
 
+  // const fetchData = (value) => {
+  //   fetch(YOUTUBE_VIDEOS_API)
+  //   .then((response) => response.json())
+  //   .then((json) => {
+  //     console.log(json)
+      // const results = json.filter((videos) => {
+        // return (
+        //   value &&
+        //   videos&&
+        //   videos?.snippet?.localized?.title &&
+        //   videos?.snippet?.localized?.title.toLowerCase().includes(value)
+        // );
+      // });
+      // console.log(results);
+    // })
+  // }
+
+
+  // useEffect(() => {
+  //   getVideos();
+  // }, [])
+
+
+  // async function getVideos(value) {
+  //   try {
+  //     const data = await fetch(YOUTUBE_VIDEOS_API);
+  //     const json = await data.json();
+  //     console.log(json.items);
+  //     const results = json.filter((videos) => {
+  //       return (
+  //         value &&
+  //         videos &&
+  //         videos?.snippet?.localized?.title &&
+  //         videos?.snippet?.localized?.title?.toLowerCase()?.includes(value)
+  //       )
+  //     })
+  //     setVideos(json.items);
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
 
 
   useEffect(() => {
@@ -63,7 +103,8 @@ const Header = () => {
   async function getSearchSuggestion(){
       const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
       const json =  await data.json();
-      setSuggestion(json[1]);
+      console.log(json)
+      setSuggestion(json[0]);
   }
 
   const dispatch = useDispatch(); 
@@ -72,6 +113,9 @@ const Header = () => {
     dispatch(toggleMenu());
   }
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+  }
   return (
     <div className='flex justify-between px-14 h-20 items-center bg-black opacity-95 sticky text-white pl-6 gap-'>
         <div className='flex  items-center text-2xl '>
@@ -89,7 +133,9 @@ const Header = () => {
           </div>
 
                <div className='flex items-center justify-center gap-5'>
-                <form>
+                <form 
+                 onSubmit={handleSearch}
+                >
                   <div className='flex bg-zinc-900 items-center h-10 px-4 pr-0 rounded-3xl'>
                     <div className='flex gap-5 items-center pr-5'>
                       <input
@@ -101,11 +147,17 @@ const Header = () => {
                       onFocus={() => setShowSuggestions(true)}
                       onBlur={() => setShowSuggestions(false)}/>
                     </div>
-                    <button className='h-10 w-16 flex items-center justify-center bg-zinc-800 rounded-r-3xl'>
+                    <button className='h-10 w-16 flex items-center justify-center bg-zinc-800 rounded-r-3xl'
+                   
+                   
+                    >
                       <AiOutlineSearch  className='text-xl'/>
                     </button>
                     </div>
-                    {showsuggestions && (
+
+
+                    
+                    {/* {showsuggestions && (
         <div className='fixed bg-black text-white p-2 w-[37rem] h-[17rem] shadow-lg rounded-lg border border-gray-100'>
           <ul className='flex flex-wrap'>
             {suggestions.map((s) => (
@@ -121,7 +173,7 @@ const Header = () => {
           </ul>
 
         </div>
-        )}
+        )} */}
         
                 
 

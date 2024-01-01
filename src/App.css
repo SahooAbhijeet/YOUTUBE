@@ -7,6 +7,16 @@ body {
     font-family: "Roboto", sans-serif
 }
 
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0.54rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: antiquewhite;
+    border-radius: 1rem;
+}
+
 @tailwind base;
-@tailwind components;
+@tailwind components;    
 @tailwind utilities;
